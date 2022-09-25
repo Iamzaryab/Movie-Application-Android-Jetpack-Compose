@@ -45,7 +45,7 @@ android {
 
 dependencies {
 
-    def androidx_ktx = "1.9.0"
+    def androidx_ktx = "1.7.0"
     implementation "androidx.core:core-ktx:$androidx_ktx"
     def android_compat = "1.5.1"
     implementation "androidx.appcompat:appcompat:$android_compat"
@@ -78,7 +78,7 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$jetpack_compose"
 
     // Integration with activities
-    def jetpack_activity = "1.6.1"
+    def jetpack_activity = "1.5.1"
     implementation "androidx.activity:activity-compose:$jetpack_activity"
     // Integration with ViewModels
     def jetpack_viewmodels = "2.5.1"
