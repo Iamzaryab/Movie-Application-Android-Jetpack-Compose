@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.zaryabshakir.movieapplicationjetpackcompose.presentation.ui.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/moveToDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/moveToMovieListFragment"
+            app:destination="@id/movieListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.zaryabshakir.movieapplicationjetpackcompose.presentation.ui.movieDetail.MovieDetailFragment"
+        android:label="MovieDetailFragment" />
+    <fragment
+        android:id="@+id/movieListFragment"
+        android:name="com.zaryabshakir.movieapplicationjetpackcompose.presentation.ui.movieList.MovieListFragment"
+        android:label="MovieListFragment" />
+</navigation>
