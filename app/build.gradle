@@ -103,4 +103,8 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt"
     kapt "com.google.dagger:hilt-compiler:$hilt"
 
+    //coil for image loading from url
+    def coil="2.1.0"
+    implementation("io.coil-kt:coil-compose:$coil")
+
 }
