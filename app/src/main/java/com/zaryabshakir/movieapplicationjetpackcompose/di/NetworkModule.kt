@@ -9,6 +9,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -51,12 +52,14 @@ object NetworkModule {
 
     @Singleton
     @Provides
+    @Named("api_key")
     fun provideApiKey(): String {
         return "0e7274f05c36db12cbe71d9ab0393d47"
     }
 
     @Singleton
     @Provides
+    @Named("pre_image_url")
     fun providePreImageUrl(): String {
         return "https://image.tmdb.org/t/p/w500"
     }
