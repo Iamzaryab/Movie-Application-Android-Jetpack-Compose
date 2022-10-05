@@ -104,7 +104,11 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hilt"
 
     //coil for image loading from url
-    def coil="2.1.0"
+    def coil = "2.1.0"
     implementation("io.coil-kt:coil-compose:$coil")
+
+    //Constraint Layout
+    def constraint_layout_compose = "1.0.1"
+    implementation "androidx.constraintlayout:constraintlayout-compose:$constraint_layout_compose"
 
 }

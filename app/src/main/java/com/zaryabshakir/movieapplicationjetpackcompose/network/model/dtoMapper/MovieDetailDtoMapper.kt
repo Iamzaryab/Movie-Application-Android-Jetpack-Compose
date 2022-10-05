@@ -16,7 +16,11 @@ class MovieDetailDtoMapper(
         return MovieDetail(
             adult = model.adult,
             backdropPath = model.backdrop_path,
-            belongsToCollection = belongToCollectionDtoMapper.mapToDomainModel(model.belongs_to_collection),
+            belongsToCollection = model.belongs_to_collection?.let {
+                belongToCollectionDtoMapper.mapToDomainModel(
+                    model.belongs_to_collection
+                )
+            } ,
             budget = model.budget,
             genres = genreDtoMapper.toDomainList(model.genres),
             homepage = model.homepage,
@@ -45,7 +49,11 @@ class MovieDetailDtoMapper(
         return MovieDetailDto(
             adult = domainModel.adult,
             backdrop_path = domainModel.backdropPath,
-            belongs_to_collection = belongToCollectionDtoMapper.mapFromDomainModel(domainModel.belongsToCollection),
+            belongs_to_collection = domainModel.belongsToCollection?.let {
+                belongToCollectionDtoMapper.mapFromDomainModel(
+                    domainModel.belongsToCollection
+                )
+            } ,
             budget = domainModel.budget,
             genres = genreDtoMapper.fromDomainList(domainModel.genres),
             homepage = domainModel.homepage,

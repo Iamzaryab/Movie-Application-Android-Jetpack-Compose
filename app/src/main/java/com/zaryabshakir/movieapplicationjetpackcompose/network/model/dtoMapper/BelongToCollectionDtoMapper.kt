@@ -6,7 +6,7 @@ import com.zaryabshakir.movieapplicationjetpackcompose.network.model.BelongToCol
 
 
 class BelongToCollectionDtoMapper : DomainMapper<BelongToCollectionDto, BelongToCollection> {
-    override fun mapToDomainModel(model: BelongToCollectionDto): BelongToCollection {
+    override fun mapToDomainModel(model: BelongToCollectionDto): BelongToCollection{
         return BelongToCollection(
             id = model.id,
             name = model.name,
@@ -15,7 +15,7 @@ class BelongToCollectionDtoMapper : DomainMapper<BelongToCollectionDto, BelongTo
         )
     }
 
-    override fun mapFromDomainModel(domainModel: BelongToCollection): BelongToCollectionDto {
+    override fun mapFromDomainModel(domainModel: BelongToCollection): BelongToCollectionDto{
         return BelongToCollectionDto(
             id = domainModel.id,
             name = domainModel.name,
