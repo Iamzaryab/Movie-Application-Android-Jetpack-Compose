@@ -40,14 +40,19 @@ object NetworkModule {
 
     @Singleton
     @Provides
+    fun provideCasts(): CastDtoMapper {
+        return CastDtoMapper()
+    }
+
+    @Singleton
+    @Provides
     fun provideMovieDetailMapper(): MovieDetailDtoMapper {
         return MovieDetailDtoMapper(
             belongToCollectionDtoMapper = BelongToCollectionDtoMapper(),
             genreDtoMapper = GenreDtoMapper(),
             spokenLanguagesDtoMapper = SpokenLanguagesDtoMapper(),
             productionCountriesDtoMapper = ProductionCountriesDtoMapper(),
-            productionCompaniesDtoMapper = ProductionCompaniesDtoMapper()
-        )
+            productionCompaniesDtoMapper = ProductionCompaniesDtoMapper(),)
     }
 
     @Singleton

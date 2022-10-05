@@ -22,9 +22,11 @@ fun GenreChip(genreId: Int, genres: List<Genre>) {
         shape = RoundedCornerShape(18.dp),
         border = BorderStroke(1.dp, GenreChipBg),
         color = GenreChipBg,
+        modifier = Modifier.padding(end = 8.dp)
     ) {
+
         Text(
-            text = genres.find { it.id.equals(genreId) }?.name.toString(),
+            text = genres.find { it.id == genreId }?.name.toString(),
             style = TextStyle(
                 color = GenreChipTextColor,
                 fontSize = 12.sp

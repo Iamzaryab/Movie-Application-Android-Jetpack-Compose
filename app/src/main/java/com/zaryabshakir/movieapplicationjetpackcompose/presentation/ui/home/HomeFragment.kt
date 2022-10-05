@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.zaryabshakir.movieapplicationjetpackcompose.domain.model.Movie
 import com.zaryabshakir.movieapplicationjetpackcompose.presentation.components.NowShowingMovies
 import com.zaryabshakir.movieapplicationjetpackcompose.presentation.components.PopularMovies
@@ -52,7 +53,8 @@ class HomeFragment : Fragment() {
                      */
                     NowShowingMovies(
                         movies = nowShowingMovies.value,
-                        preImageUrl = viewModel.preImgUrl
+                        preImageUrl = viewModel.preImgUrl,
+                        findNavController()
                     )
                     /**
                      * Popular Movies

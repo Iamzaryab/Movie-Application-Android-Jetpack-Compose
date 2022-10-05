@@ -1,5 +1,7 @@
 package com.zaryabshakir.movieapplicationjetpackcompose.presentation.components
 
+import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
@@ -16,17 +18,23 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.zaryabshakir.movieapplicationjetpackcompose.domain.model.Movie
+import com.zaryabshakir.movieapplicationjetpackcompose.util.TAG
 
 @Composable
 fun NowShowingMovieCard(
     movie: Movie,
-    preImageUrl: String
+    preImageUrl: String,
+    onClick: (movieId: Int) -> Unit
 ) {
     Column(
         modifier = Modifier
             .padding(start = 6.dp, end = 6.dp, bottom = 8.dp)
             .width(150.dp)
             .height(280.dp)
+            .clickable {
+                Log.d(TAG, "NowShowingMovieCard: ${movie.toString()}")
+                onClick(movie.id)
+            },
     ) {
         val imageUrl = preImageUrl + movie.posterPath
         Card(
@@ -53,7 +61,11 @@ fun NowShowingMovieCard(
                 fontWeight = FontWeight(500)
             )
         )
-        Rating(rating = movie.voteAverage)
+        Rating(
+            rating = movie.voteAverage,
+            modifier = Modifier.padding(top = 8.dp)
+        )
+
 
     }
 

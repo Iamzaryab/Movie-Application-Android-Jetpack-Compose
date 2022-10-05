@@ -1,6 +1,7 @@
 package com.zaryabshakir.movieapplicationjetpackcompose.di
 
 import com.zaryabshakir.movieapplicationjetpackcompose.network.MovieService
+import com.zaryabshakir.movieapplicationjetpackcompose.network.model.dtoMapper.CastDtoMapper
 import com.zaryabshakir.movieapplicationjetpackcompose.network.model.dtoMapper.GenreDtoMapper
 import com.zaryabshakir.movieapplicationjetpackcompose.network.model.dtoMapper.MovieDetailDtoMapper
 import com.zaryabshakir.movieapplicationjetpackcompose.network.model.dtoMapper.MovieDtoMapper
@@ -22,10 +23,11 @@ object RepositoryModule {
         movieService: MovieService,
         movieDtoMapper: MovieDtoMapper,
         movieDetailDtoMapper: MovieDetailDtoMapper,
-        genreDtoMapper: GenreDtoMapper
+        genreDtoMapper: GenreDtoMapper,
+        castDtoMapper: CastDtoMapper
     ): MovieRepository {
         return MovieRepository_Impl(
-            movieService, movieDtoMapper, movieDetailDtoMapper, genreDtoMapper,
+            movieService, movieDtoMapper, movieDetailDtoMapper, genreDtoMapper, castDtoMapper
         )
     }
 }

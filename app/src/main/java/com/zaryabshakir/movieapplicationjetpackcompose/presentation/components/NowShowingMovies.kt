@@ -1,5 +1,8 @@
 package com.zaryabshakir.movieapplicationjetpackcompose.presentation.components
 
+import android.os.Bundle
+import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -9,15 +12,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.zaryabshakir.movieapplicationjetpackcompose.domain.model.Movie
+import com.zaryabshakir.movieapplicationjetpackcompose.R
+import com.zaryabshakir.movieapplicationjetpackcompose.util.TAG
 
 @Composable
 fun NowShowingMovies(
     movies: List<Movie>,
-    preImageUrl: String
+    preImageUrl: String,
+    navigationController: NavController
 ) {
     Row(
         modifier = Modifier
@@ -37,9 +43,19 @@ fun NowShowingMovies(
             }
         }
     }
-    LazyRow() {
+    LazyRow(
+    ) {
         itemsIndexed(items = movies) { index: Int, movie: Movie ->
-            NowShowingMovieCard(movie = movie, preImageUrl = preImageUrl)
+            NowShowingMovieCard(
+                movie = movie,
+                preImageUrl = preImageUrl,
+                onClick = {
+                    val bundle = Bundle()
+                    bundle.putInt("movieId", it)
+                    Log.d(TAG, "NowShowingMovies: sending movie $it")
+                    navigationController.navigate(R.id.moveToDetailFragment, bundle)
+                }
+            )
         }
     }
 }

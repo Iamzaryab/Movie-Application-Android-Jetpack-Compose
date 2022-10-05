@@ -48,7 +48,10 @@ fun PopularMoviesCard(
             modifier = Modifier.padding(start = 8.dp)
         ) {
             MovieTitle(title = movie.title, fontSize = 14)
-            Rating(rating = movie.voteAverage)
+            Rating(
+                rating = movie.voteAverage,
+                modifier = Modifier.padding(top = 8.dp)
+            )
             LazyRow() {
                 itemsIndexed(items = movie.genreIds) { index: Int, genreId: Int ->
                     GenreChip(genreId = genreId, genres = genres)

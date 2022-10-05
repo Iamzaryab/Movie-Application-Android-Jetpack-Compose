@@ -21,10 +21,11 @@ import com.zaryabshakir.movieapplicationjetpackcompose.presentation.theme.Rating
 
 @Composable
 fun Rating(
-    rating: Float
+    rating: Float,
+    modifier: Modifier
 ) {
     Row(
-        modifier = Modifier.padding(top = 8.dp, start = 2.dp, end = 2.dp)
+        modifier = modifier
     ) {
         Icon(
             Icons.Filled.Star,
