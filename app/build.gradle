@@ -83,8 +83,8 @@ dependencies {
     def jetpack_activity = "1.5.1"
     implementation "androidx.activity:activity-compose:$jetpack_activity"
     // Integration with ViewModels
-    def jetpack_viewmodels = "2.5.1"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$jetpack_viewmodels"
+    def jetpack_view_models = "2.5.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$jetpack_view_models"
 
     //Navigation
     def nav_version = "2.5.2"
