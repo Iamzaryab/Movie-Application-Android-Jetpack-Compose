@@ -1,27 +1,21 @@
 package com.zaryabshakir.movieapplicationjetpackcompose.presentation.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.zaryabshakir.movieapplicationjetpackcompose.domain.model.Movie
-import com.zaryabshakir.movieapplicationjetpackcompose.presentation.components.NowShowingMovies
-import com.zaryabshakir.movieapplicationjetpackcompose.presentation.components.PopularMovies
-import com.zaryabshakir.movieapplicationjetpackcompose.util.TAG
+import com.zaryabshakir.movieapplicationjetpackcompose.presentation.components.ToolBar
+import com.zaryabshakir.movieapplicationjetpackcompose.presentation.components.home.NowShowingMovies
+import com.zaryabshakir.movieapplicationjetpackcompose.presentation.components.home.PopularMovies
+import com.zaryabshakir.movieapplicationjetpackcompose.presentation.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.log
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -33,39 +27,64 @@ class HomeFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                val nowShowingMovies = viewModel.nowPlayingMovies
-                val popularMovies = viewModel.popularMovies
-                Log.d(TAG, "onCreateView: " + popularMovies.value)
-                Column(
-                    modifier = Modifier.padding(5.dp)
+                AppTheme(
+                    darkTheme = false,
                 ) {
-                    /**
-                     * ToolBar
-                     */
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center
+                    val nowShowingMovies = viewModel.nowShowingMovies
+                    val popularMovies = viewModel.popularMovies
+                    val isNowShowingLoading = viewModel.isNowShowingLoading.value
+                    val isNowShowingLoadingMore = viewModel.isNowShowingLoadingMore.value
+                    val isPopularLoading = viewModel.isPopularLoading.value
+                    val isPopularLoadingMore = viewModel.isPopularLoadingMore.value
+                    val nowShowingPage = viewModel.nowShowingPage.value
+                    val popularPage = viewModel.popularPage.value
+
+                    Column(
+                        modifier = Modifier.fillMaxSize()
                     ) {
-                        Text(text = "Movie Application")
+                        /**
+                         * ToolBar
+                         */
+                        ToolBar()
+                        /**
+                         * Now Showing Movies
+                         */
+                        NowShowingMovies(
+                            movies = nowShowingMovies.value,
+                            preImageUrl = viewModel.preImgUrl,
+                            navigationController = findNavController(),
+                            showShimmer = isNowShowingLoading,
+                            onItemScrollChanged = {
+                                viewModel.onChangeNowShowingScrollPosition(it)
+                                if ((it + 1) >= (nowShowingPage * PAGE_SIZE) && !isNowShowingLoadingMore) {
+                                    viewModel.nextNowShowingPage()
+                                }
+                            },
+                            isLoadingMore = isNowShowingLoadingMore
+                        )
+
+                        /**
+                         * Popular Movies
+                         */
+                        PopularMovies(
+                            movies = popularMovies.value,
+                            preImageUrl = viewModel.preImgUrl,
+                            genres = viewModel.genreList.value,
+                            navigationController = findNavController(),
+                            showShimmer = isPopularLoading,
+                            onItemScrollChanged = {
+                                viewModel.onChangePopularScrollPosition(it)
+                                if ((it + 1) >= (popularPage * PAGE_SIZE) && !isPopularLoadingMore) {
+                                    viewModel.nextPopularPage()
+                                }
+                            },
+                            isLoadingMore = isPopularLoadingMore
+                        )
                     }
-                    /**
-                     * Now Showing Movies
-                     */
-                    NowShowingMovies(
-                        movies = nowShowingMovies.value,
-                        preImageUrl = viewModel.preImgUrl,
-                        findNavController()
-                    )
-                    /**
-                     * Popular Movies
-                     */
-                    PopularMovies(
-                        movies = nowShowingMovies.value,
-                        preImageUrl = viewModel.preImgUrl,
-                        viewModel.genreList.value
-                    )
 
                 }
+
+
             }
         }
     }
