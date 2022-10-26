@@ -45,10 +45,7 @@ class HomeFragment : Fragment() {
                         /**
                          * ToolBar
                          */
-                        ToolBar(
-                            darkTheme = viewModel.darkTheme.value,
-                            onToggleDarkTheme = viewModel::onToggleDarkTheme
-                        )
+                        ToolBar()
                         /**
                          * Now Showing Movies
                          */
