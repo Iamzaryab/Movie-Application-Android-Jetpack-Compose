@@ -14,7 +14,7 @@ class MovieDtoMapper : DomainMapper<MovieDto, Movie> {
     override fun mapToDomainModel(model: MovieDto): Movie {
         return Movie(
             adult = model.adult,
-            backdrop_path = model.backdrop_path,
+            backdrop_path = model.backdrop_path.let { model.backdrop_path } ?: "",
             genreIds = model.genre_ids,
             id = model.id,
             originalLanguage = model.original_language,
