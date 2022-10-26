@@ -1,9 +1,12 @@
 package com.zaryabshakir.movieapplicationjetpackcompose.presentation.theme
 
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 
@@ -45,6 +48,10 @@ fun AppTheme(
         colors = if (darkTheme) darkThemeColors else lightThemeColors,
         typography = CustomTypography
     ) {
+        BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+            deviceHeight.value = maxHeight
+            deviceWidth.value = maxWidth
+        }
         content()
     }
 
