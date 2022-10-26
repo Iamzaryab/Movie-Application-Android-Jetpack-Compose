@@ -32,6 +32,7 @@ constructor(
     val isNowShowingLoadingMore: MutableState<Boolean> = mutableStateOf(false)
     val isPopularLoading: MutableState<Boolean> = mutableStateOf(false)
     val isPopularLoadingMore: MutableState<Boolean> = mutableStateOf(false)
+    val darkTheme: MutableState<Boolean> = mutableStateOf(false)
 
     val nowShowingPage = mutableStateOf(1)
     private var nowShowingScrollPosition = 0
@@ -81,10 +82,7 @@ constructor(
 
     fun nextNowShowingPage() {
         viewModelScope.launch {
-            Log.d(
-                TAG,
-                "nextNowShowingPage: NowShowingScroll $nowShowingScrollPosition NowShowingPage ${nowShowingPage.value}"
-            )
+
             //prevent duplicate events
             if ((nowShowingScrollPosition + 1) >= (nowShowingPage.value * PAGE_SIZE)) {
                 isNowShowingLoadingMore.value = true
@@ -160,6 +158,11 @@ constructor(
 
     fun onChangePopularScrollPosition(position: Int) {
         popularScrollPosition = position
+    }
+
+    fun onToggleDarkTheme() {
+        Log.d(TAG, "onToggleDarkTheme: Toggle Theme Clicked ${darkTheme.value}")
+        darkTheme.value = !darkTheme.value
     }
 
 
