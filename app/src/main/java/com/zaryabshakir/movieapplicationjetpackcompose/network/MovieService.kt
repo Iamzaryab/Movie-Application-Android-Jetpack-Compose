@@ -7,10 +7,8 @@ import com.zaryabshakir.movieapplicationjetpackcompose.network.responses.MoviesR
 import retrofit2.http.Path
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.util.Objects
 
 interface MovieService {
-
 
     @GET("movie/{type}")
     suspend fun getMovies(
@@ -18,7 +16,6 @@ interface MovieService {
         @Query("page") page: Int,
         @Query("api_key") key: String
     ): MoviesResponse
-
 
     @GET("genre/movie/list")
     suspend fun genre(
@@ -36,5 +33,4 @@ interface MovieService {
         @Path("movie_id") id: Int,
         @Query("api_key") key: String
     ): CastsResponse
-
 }
