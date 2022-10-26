@@ -1,23 +1,18 @@
 package com.zaryabshakir.movieapplicationjetpackcompose.presentation.ui.movieDetail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material.Text
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
 import com.zaryabshakir.movieapplicationjetpackcompose.domain.model.Cast
 import com.zaryabshakir.movieapplicationjetpackcompose.domain.model.MovieDetail
-import com.zaryabshakir.movieapplicationjetpackcompose.presentation.components.MovieDetailComponent
-import com.zaryabshakir.movieapplicationjetpackcompose.util.TAG
+import com.zaryabshakir.movieapplicationjetpackcompose.presentation.components.movieDetail.MovieDetailComponent
+import com.zaryabshakir.movieapplicationjetpackcompose.presentation.components.shimmers.MovieDetailShimmer
+import com.zaryabshakir.movieapplicationjetpackcompose.presentation.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.log
 
 @AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
@@ -29,7 +24,6 @@ class MovieDetailFragment : Fragment() {
             this.movieId = movieId
             viewModel.getMovie(movieId)
             viewModel.getCasts(movieId)
-
         }
     }
 
@@ -39,14 +33,21 @@ class MovieDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         return ComposeView(requireContext()).apply {
-            val movieDetail: MovieDetail? = viewModel.movieDetail.value
-            val casts: List<Cast> = viewModel.casts.value
             setContent {
-                MovieDetailComponent(
-                    movieDetail = movieDetail,
-                    preImageUrl = viewModel.preImgUrl,
-                    casts = casts
-                )
+                AppTheme(darkTheme = false) {
+                    val movieDetail: MovieDetail? = viewModel.movieDetail.value
+                    val casts: List<Cast> = viewModel.casts.value
+                    val loading = viewModel.loading.value
+                    if (loading)
+                        MovieDetailShimmer()
+                    else
+                        MovieDetailComponent(
+                            movieDetail = movieDetail,
+                            preImageUrl = viewModel.preImgUrl,
+                            casts = casts
+                        )
+                }
+
             }
         }
     }
