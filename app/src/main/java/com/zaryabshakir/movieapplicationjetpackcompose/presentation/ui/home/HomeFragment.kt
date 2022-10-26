@@ -22,13 +22,14 @@ class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by activityViewModels()
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme(
-                    darkTheme = false,
+                    darkTheme = viewModel.darkTheme.value,
                 ) {
                     val nowShowingMovies = viewModel.nowShowingMovies
                     val popularMovies = viewModel.popularMovies
@@ -38,14 +39,16 @@ class HomeFragment : Fragment() {
                     val isPopularLoadingMore = viewModel.isPopularLoadingMore.value
                     val nowShowingPage = viewModel.nowShowingPage.value
                     val popularPage = viewModel.popularPage.value
-
                     Column(
                         modifier = Modifier.fillMaxSize()
                     ) {
                         /**
                          * ToolBar
                          */
-                        ToolBar()
+                        ToolBar(
+                            darkTheme = viewModel.darkTheme.value,
+                            onToggleDarkTheme = viewModel::onToggleDarkTheme
+                        )
                         /**
                          * Now Showing Movies
                          */
