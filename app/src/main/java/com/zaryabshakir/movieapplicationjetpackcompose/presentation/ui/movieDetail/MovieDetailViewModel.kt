@@ -1,6 +1,5 @@
 package com.zaryabshakir.movieapplicationjetpackcompose.presentation.ui.movieDetail
 
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -8,12 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.zaryabshakir.movieapplicationjetpackcompose.domain.model.Cast
 import com.zaryabshakir.movieapplicationjetpackcompose.domain.model.MovieDetail
 import com.zaryabshakir.movieapplicationjetpackcompose.repository.MovieRepository
-import com.zaryabshakir.movieapplicationjetpackcompose.util.TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
-import kotlin.math.log
 
 @HiltViewModel
 class MovieDetailViewModel
@@ -25,10 +22,12 @@ constructor(
 ) : ViewModel() {
     val movieDetail: MutableState<MovieDetail?> = mutableStateOf(null)
     val casts: MutableState<List<Cast>> = mutableStateOf(listOf())
-
-    public fun getMovie(id: Int) {
+    val loading: MutableState<Boolean> = mutableStateOf(false)
+     fun getMovie(id: Int) {
         viewModelScope.launch {
+            loading.value = true
             movieDetail.value = movieRepository.getMoviesDetail(id, apiKey)
+            loading.value = false
         }
 
     }
